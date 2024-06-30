@@ -15,6 +15,7 @@ load_dotenv()
 username = os.environ.get("LINKEDIN_USER")
 password = os.environ.get("LINKEDIN_PASS")
 
+#login for Linkedin
 def linkedin_login(driver, email, password):
     driver.get("https://www.linkedin.com/login")
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "username")))
@@ -23,6 +24,7 @@ def linkedin_login(driver, email, password):
     password_input.send_keys(password)
     password_input.send_keys(Keys.RETURN)
 
+#Scrapping jobs for title, Company & Location
 def scrape_jobs(driver):
     job_list = []
     job_cards = driver.find_elements(By.CLASS_NAME, "job-card-container")
@@ -34,20 +36,22 @@ def scrape_jobs(driver):
             location = retry_find_text(card, By.CLASS_NAME, "job-card-container__metadata-wrapper")
             job_list.append({"title": job_title, "company": company_name, "location": location})
         except StaleElementReferenceException:
-            continue  # Skip this card if any of its elements have gone stale
+            continue  
 
     return job_list
 
+#This function is for retry if the jobs become stale.
 def retry_find_text(element, by, value):
     attempts = 0
     while attempts < 3:
         try:
             return element.find_element(by, value).text
         except StaleElementReferenceException:
-            time.sleep(1)  # Wait a bit for the DOM to stabilize
+            time.sleep(1)  
             attempts += 1
     return ""
 
+#Writes the jobs to a csv file
 def save_jobs_to_csv(jobs):
     keys = jobs[0].keys()
     with open('jobs.csv', 'w', newline='')  as output_file:
