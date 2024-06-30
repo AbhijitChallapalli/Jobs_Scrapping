@@ -10,7 +10,7 @@ This tool automates the process of logging into LinkedIn, searching for jobs, an
 First, create a virtual environment to manage the project's dependencies separately from other Python projects.
 ```bash
 python3 -m venv venv
-
+```
 
 ### 2. Activate the Virtual Environment
 Activate the virtual environment:
