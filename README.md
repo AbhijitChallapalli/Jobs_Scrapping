@@ -4,9 +4,9 @@
 
 This tool automates the process of logging into LinkedIn, searching for jobs, and extracting job posting information in the past 24 hours using Python and Selenium.
 
-## Setup Instructions
-
 https://github.com/AbhijitChallapalli/Jobs_Scrapping/assets/83178772/e2b7c345-c218-4425-b257-85e78f01781a
+
+## Setup Instructions
 
 ### 1. Create a Virtual Environment
 First, create a virtual environment to manage the project's dependencies separately from other Python projects.
